@@ -30,10 +30,10 @@
   (start-watch (auto-full-config morecss ks)))
 
 (defn morecss
- "Compiles less files into css
+  "Compiles less files into css
   You can add several configurations as a map under the morecss key
   Each compilation must have:
-   
+
   :less-file
   :css-file is the file to generate
   :directories a list of the folders to watch for each compilation
@@ -41,11 +41,11 @@
   Here is a complete example:
 
   :morecss {:bootstrap {:less-file \"path/to/watch/dir1/bootstrap.less\"
-                        :css-file \"path/to/compiled/file.css\"
-                        :directories [\"path/to/watch/dir1\" \"path/to/watch/dir2\"]}}
+  :css-file \"path/to/compiled/file.css\"
+  :directories [\"path/to/watch/dir1\" \"path/to/watch/dir2\"]}}
 
   You can run it like this:
-  
+
   lein morecss once
   lein morecss auto
 
@@ -56,7 +56,7 @@
   [{:keys [morecss]} command & ks]
   (let [ks (cond
              (nil? ks) (keys morecss)
-             :else ks)]
+             :else (map keyword ks))]
     (case command
-    "once" (once morecss ks)
-    "auto" (auto morecss ks))))
+      "once" (once morecss ks)
+      "auto" (auto morecss ks))))
